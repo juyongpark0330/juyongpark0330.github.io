@@ -1,0 +1,29 @@
+{
+  "name": "차자작 · CHAJAZAK",
+  "short_name": "차자작",
+  "description": "방 청소, 프로젝트, 여행 준비처럼 막막한 일을 단계별로 따라 하는 초보자용 실행 가이드. 진행률은 기기에만 저장됩니다.",
+  "lang": "ko",
+  "dir": "ltr",
+  "id": "/chajazak/",
+  "start_url": "/chajazak/",
+  "scope": "/chajazak/",
+  "display": "standalone",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#0B2151",
+  "theme_color": "#0B2151",
+  "categories": ["productivity", "lifestyle", "utilities"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

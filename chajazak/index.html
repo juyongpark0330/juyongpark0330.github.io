@@ -10,11 +10,13 @@
 <meta name="color-scheme" content="light">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="차자작">
 <meta name="format-detection" content="telephone=no">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230B2151'/%3E%3Crect x='9' y='41' width='17.2' height='10.2' rx='3.4' fill='%2364E1C5'/%3E%3Crect x='26.2' y='31.5' width='14.2' height='19.7' rx='3.4' fill='%233BE1BF'/%3E%3Crect x='40.4' y='21' width='14.6' height='30.2' rx='3.4' fill='%23FD7D62'/%3E%3Cpath d='M 11.60 41.00 C 12.26 41.64 14.89 45.00 16.00 45.30 C 17.11 45.60 18.10 43.98 19.00 43.00 C 19.90 42.02 21.10 40.27 22.00 38.80 C 22.90 37.33 24.10 34.55 25.00 33.20 C 25.90 31.85 26.95 30.61 28.00 29.80 C 29.05 28.99 30.80 28.10 32.00 27.80 C 33.20 27.50 34.95 28.13 36.00 27.80 C 37.05 27.47 38.10 26.64 39.00 25.60 C 39.90 24.57 41.07 22.05 42.00 20.90 C 42.93 19.74 44.11 19.04 45.20 17.90 C 46.30 16.76 48.68 13.99 49.30 13.30' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49.3 13.3 L45.0 13.2 M49.3 13.3 L48.9 17.6' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230B2151'/%3E%3Crect x='9' y='41' width='17.2' height='10.2' rx='3.4' fill='%2364E1C5'/%3E%3Crect x='26.2' y='31.5' width='14.2' height='19.7' rx='3.4' fill='%233BE1BF'/%3E%3Crect x='40.4' y='21' width='14.6' height='30.2' rx='3.4' fill='%23FD7D62'/%3E%3Cpath d='M 11.60 41.00 C 12.26 41.64 14.89 45.00 16.00 45.30 C 17.11 45.60 18.10 43.98 19.00 43.00 C 19.90 42.02 21.10 40.27 22.00 38.80 C 22.90 37.33 24.10 34.55 25.00 33.20 C 25.90 31.85 26.95 30.61 28.00 29.80 C 29.05 28.99 30.80 28.10 32.00 27.80 C 33.20 27.50 34.95 28.13 36.00 27.80 C 37.05 27.47 38.10 26.64 39.00 25.60 C 39.90 24.57 41.07 22.05 42.00 20.90 C 42.93 19.74 44.11 19.04 45.20 17.90 C 46.30 16.76 48.68 13.99 49.30 13.30' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49.3 13.3 L45.0 13.2 M49.3 13.3 L48.9 17.6' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" sizes="180x180" href="./icons/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+<link rel="manifest" href="./manifest.webmanifest">
 <style>
 :root{
   --bg:#f5f2ec; --bg-2:#efe9df; --card:#ffffff;
@@ -26,6 +28,7 @@
   --shadow:0 1px 2px rgba(27,35,33,.05), 0 10px 26px -16px rgba(27,35,33,.28);
   --shadow-lg:0 2px 4px rgba(27,35,33,.05), 0 22px 48px -24px rgba(27,35,33,.35);
   --safe-b:env(safe-area-inset-bottom, 0px);
+  --safe-t:env(safe-area-inset-top, 0px);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -47,9 +50,13 @@ ul{margin:0; padding:0; list-style:none}
 .wrap.narrow{max-width:760px}
 @media (max-width:520px){ .wrap{padding:0 16px} }
 
+/* iOS 홈 화면 앱(검은 반투명 상태 표시줄)에서 시계·배터리가 묻히지 않도록 네이비 띠 확보 */
+body{padding-top:var(--safe-t)}
+body::before{content:'';position:fixed;top:0;left:0;right:0;height:var(--safe-t);background:#0B2151;z-index:70;pointer-events:none}
+
 /* ---------- header ---------- */
 .app-header,.detail-header{
-  position:sticky; top:0; z-index:30;
+  position:sticky; top:var(--safe-t); z-index:30;
   background:rgba(245,242,236,.88); backdrop-filter:saturate(1.3) blur(12px); -webkit-backdrop-filter:saturate(1.3) blur(12px);
   border-bottom:1px solid var(--line);
 }
@@ -1678,19 +1685,10 @@ document.addEventListener('keydown', function(e){
 /* =========================================================
    11. 시작
    ========================================================= */
-if (location.protocol === 'http:' || location.protocol === 'https:') {
-  try {
-    var iconSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='13' fill='%230B2151'/%3E%3Crect x='9' y='41' width='17.2' height='10.2' rx='3.4' fill='%2364E1C5'/%3E%3Crect x='26.2' y='31.5' width='14.2' height='19.7' rx='3.4' fill='%233BE1BF'/%3E%3Crect x='40.4' y='21' width='14.6' height='30.2' rx='3.4' fill='%23FD7D62'/%3E%3Cpath d='M 11.60 41.00 C 12.26 41.64 14.89 45.00 16.00 45.30 C 17.11 45.60 18.10 43.98 19.00 43.00 C 19.90 42.02 21.10 40.27 22.00 38.80 C 22.90 37.33 24.10 34.55 25.00 33.20 C 25.90 31.85 26.95 30.61 28.00 29.80 C 29.05 28.99 30.80 28.10 32.00 27.80 C 33.20 27.50 34.95 28.13 36.00 27.80 C 37.05 27.47 38.10 26.64 39.00 25.60 C 39.90 24.57 41.07 22.05 42.00 20.90 C 42.93 19.74 44.11 19.04 45.20 17.90 C 46.30 16.76 48.68 13.99 49.30 13.30' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3Cpath d='M49.3 13.3 L45.0 13.2 M49.3 13.3 L48.9 17.6' fill='none' stroke='%23ffffff' stroke-width='2.9' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E";
-    var manifest = {
-      name:'차자작 · CHAJAZAK', short_name:'차자작', start_url:'./', display:'standalone',
-      background_color:'#f5f2ec', theme_color:'#0f766e', lang:'ko',
-      icons:[{ src:iconSvg, sizes:'any', type:'image/svg+xml', purpose:'any' }]
-    };
-    var ml = document.createElement('link');
-    ml.rel = 'manifest';
-    ml.href = 'data:application/manifest+json,' + encodeURIComponent(JSON.stringify(manifest));
-    document.head.appendChild(ml);
-  } catch (e) {}
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
+  window.addEventListener('load', function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(){ /* 사파리 사설 모드 등에서는 등록되지 않아도 앱은 그대로 동작 */ });
+  });
 }
 render();
 })();
